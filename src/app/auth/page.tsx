@@ -1,5 +1,3 @@
-"use client";
-
 import { AuthScreen } from "@/features/auth/components/auth-screen";
 
 const AuthPage = () => {
@@ -9,5 +7,4 @@ const AuthPage = () => {
     </div>
   );
 };
-
 export default AuthPage;
