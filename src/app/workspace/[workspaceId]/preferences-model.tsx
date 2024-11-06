@@ -63,6 +63,7 @@ export const PreferencesModel = ({
   };
   const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     updateWorkspace(
       {
         id: workspaceId,
