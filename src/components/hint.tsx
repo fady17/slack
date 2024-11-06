@@ -9,7 +9,7 @@ import {
 interface HintProps {
   label: string;
   children: React.ReactNode;
-  side?: "bottom" | "right" | "bottom" | "left";
+  side?: "bottom" | "right" | "top" | "left";
   align?: "start" | "center" | "end";
 }
 export const Hint = ({ label, children, side, align }: HintProps) => {
