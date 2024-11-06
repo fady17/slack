@@ -3,7 +3,7 @@ import { api } from "../../../../convex/_generated/api";
 import { useCallback, useMemo, useState } from "react";
 import { Id } from "../../../../convex/_generated/dataModel";
 
-type RequestType = { name: string };
+type RequestType = { id: Id<"workspaces"> };
 type ResponseType = Id<"workspaces"> | null;
 
 type Options = {
@@ -12,7 +12,7 @@ type Options = {
   onSettled?: () => void;
   throwError?: boolean;
 };
-export const useCreateWorkspace = () => {
+export const useRemoveWorkspace = () => {
   const [data, setData] = useState<ResponseType>(null);
   const [error, setError] = useState<Error | null>(null);
 
@@ -20,17 +20,12 @@ export const useCreateWorkspace = () => {
     "success" | "error" | "settled" | "pending" | null
   >(null);
 
-  //   const [isPending, setIsPending] = useState(false);
-  //   const [isSuccess, setIsSuccess] = useState(false);
-  //   const [isError, setIsError] = useState(false);
-  //   const [isSettled, setIsSettled] = useState(false);
-
   const isPending = useMemo(() => status === "pending", [status]);
   const isSuccess = useMemo(() => status === "success", [status]);
   const isError = useMemo(() => status === "error", [status]);
   const isSettled = useMemo(() => status === "settled", [status]);
 
-  const mutation = useMutation(api.workspaces.create);
+  const mutation = useMutation(api.workspaces.remove);
 
   const mutate = useCallback(
     async (values: RequestType, options?: Options) => {
@@ -38,10 +33,7 @@ export const useCreateWorkspace = () => {
         setData(null);
         setError(null);
         setStatus("pending");
-        // setIsPending(true);
-        // setIsError(false);
-        // setIsSettled(false);
-        // setIsSuccess(false);
+
         const response = await mutation(values);
         options?.onSuccess?.(response);
         return response;
@@ -54,8 +46,7 @@ export const useCreateWorkspace = () => {
         }
       } finally {
         setStatus("settled");
-        // setIsPending(false);
-        // setIsSettled(true);
+
         options?.onSettled?.();
       }
     },
