@@ -14,9 +14,13 @@ import { useGetChannels } from "@/features/channels/api/use-get-channels";
 import { WorkspaceSection } from "./workspace-section";
 import { useGetMembers } from "@/features/members/api/use-get-membersr";
 import { UserItem } from "./user-item";
+import { useCreateChannelModel } from "@/features/channels/store/use-create-channel-model";
 
 export const WorkspaceSidebar = () => {
   const workspaceId = useWorkspaceId();
+
+  const [_open, setOpen] = useCreateChannelModel();
+
   const { data: member, isLoading: memberLoading } = useCurrentMember({
     workspaceId,
   });
@@ -55,7 +59,11 @@ export const WorkspaceSidebar = () => {
         <SidebarItem label="Threads" icon={MessageSquareText} id="threads" />
         <SidebarItem label="Drafts & Sent" icon={SendHorizonal} id="drafts" />
       </div>
-      <WorkspaceSection label={"Channels"} hint="New Channel" onNew={() => {}}>
+      <WorkspaceSection
+        label={"Channels"}
+        hint="New Channel"
+        onNew={member.role === "admin" ? () => setOpen(true) : undefined}
+      >
         {channels?.map((item) => (
           <SidebarItem
             key={item._id}
@@ -68,7 +76,7 @@ export const WorkspaceSidebar = () => {
       <WorkspaceSection
         label={"Direct Messages"}
         hint="New direct message"
-        onNew={() => {}}
+        onNew={() => setOpen(true)}
       >
         {members?.map((item) => (
           <UserItem
