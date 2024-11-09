@@ -16,6 +16,7 @@ const config: Config = {
         },
       },
       animation: {
+        "spin-slow": "spin 3s linear infinite",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
       },
       colors: {
