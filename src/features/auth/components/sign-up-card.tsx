@@ -99,9 +99,10 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
             type="password"
             required
           />
+          <Separator />
           <Button
             type="submit"
-            className="w-full"
+            className="mt-2 w-full"
             size={"lg"}
             disabled={pending}
           >
@@ -110,7 +111,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
         </form>
         <Separator />
         <div className="flex flex-col gap-y-2.5">
-          <Button
+          {/* <Button
             disabled={pending}
             onClick={() => onProviderSignUp("google")}
             variant={"outline"}
@@ -119,19 +120,32 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
           >
             <FcGoogle className="size-5 absolute top-2.5 left-2.5" />
             Continue with Google
+          </Button> */}
+          <Button
+            disabled={pending}
+            onClick={() => onProviderSignUp("google")}
+            variant={"outline"}
+            size={"lg"}
+            className="mt-2 mb-2 w-full flex flex-col items-center"
+          >
+            <FcGoogle className="text-2xl mb-1" />
+            <span>Continue with Google</span>
           </Button>
+          <Separator />
+
           <Button
             disabled={pending}
             onClick={() => onProviderSignUp("github")}
             variant={"outline"}
             size={"lg"}
-            className="w-full relative"
+            className="mt-2 mb-2 w-full flex flex-col items-center"
           >
-            <FaGithub className="size-5 absolute top-2.5 left-2.5" />
+            <FaGithub className="text-2xl mb-1" />
             Continue with Github
           </Button>
         </div>
-        <p className="text-sm text-muted-foreground">
+
+        <p className="mt-2 text-sm text-muted-foreground">
           Already have an account?
           <span
             onClick={() => setState("signIn")}
